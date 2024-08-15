@@ -1,0 +1,19 @@
+.navBar {
+  height: 68px;
+  z-index: 10;
+  background: #8f7f7f;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navItems {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+}
+
+
+.nav-link {
+  text-decoration: none;
+}

@@ -1,0 +1,14 @@
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.pass {
+  margin-top: 2rem;
+}
+
+.buttonG {
+  margin-top: 2rem;
+}

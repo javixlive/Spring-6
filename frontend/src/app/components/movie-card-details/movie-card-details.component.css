@@ -1,0 +1,20 @@
+.main {
+  margin-top: 5rem;
+}
+
+.star-container {
+  display: flex;
+}
+
+.fa-star{
+  margin-right: 2px;
+  color: #df8e1d;
+}
+
+.release {
+  color: #7287fd;
+}
+
+.poster {
+  margin-top: 1rem;
+}

@@ -1,0 +1,26 @@
+.row {
+  color: #4c4f69;
+}
+
+.poster {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.title {
+  margin-top: 2rem
+}
+
+.overview {
+  color: #5c5f77
+}
+
+.buttons {
+  overflow: hidden;
+  display: block
+}
+
+.btn1 {
+  margin-right: 1rem;
+  margin-left: 1rem;
+}

@@ -1,0 +1,8 @@
+<h1 class="text-capitalize">Search Movies <small>{{text}}</small></h1>
+<hr>
+<div class="row">
+    <div class="col">
+        <app-movie-card [movies]="movies" *ngIf="movies.length > 0"></app-movie-card>
+        <h3 class="text-warning" *ngIf="noMovie"><strong>{{noMovie}}</strong></h3>
+    </div>
+</div>
