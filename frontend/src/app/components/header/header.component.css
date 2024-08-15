@@ -1,7 +1,7 @@
 .navBar {
   height: 68px;
   z-index: 10;
-  background: #8f7f7f;
+  background-color: #babbf1;
   display: flex;
   align-items: center;
   justify-content: space-between;

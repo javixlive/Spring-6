@@ -1,5 +1,5 @@
 .row {
-  color: #4c4f69;
+  color: var(--text-color);
 }
 
 .poster {
@@ -12,7 +12,7 @@
 }
 
 .overview {
-  color: #5c5f77
+  color: var(--text-color);
 }
 
 .buttons {
