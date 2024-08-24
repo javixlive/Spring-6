@@ -47,14 +47,14 @@ export class HomeComponent implements OnInit{
   //should it load more movies
   loadMoreMovies() {
     this.moviesSvc.getMovie().subscribe(res => {
-      const newMovies = res.filter(movie => !this.loadedMoviesIds.has(movie.id));
+      const newMovies = res.filter(movie => !this.loadedMoviesIds.has(movie.movieId));
       this.movies.push(...newMovies);
       this.updateLoadedMovieIds();
     })
   }
 
   updateLoadedMovieIds() {
-    this.movies.forEach(movie => this.loadedMoviesIds.add(movie.id))
+    this.movies.forEach(movie => this.loadedMoviesIds.add(movie.movieId))
   }
 
 }

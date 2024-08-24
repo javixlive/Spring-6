@@ -10,6 +10,8 @@ import { User } from "./user.model";
 import { environment } from "../environment/environment";
 
 
+const urlDb = environment.URLDB
+
 @Injectable({providedIn: 'root'})
 export class AuthService {
 
@@ -18,19 +20,19 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-    signup(email: string, password: string) {
+    signup(userEmail: string, userPassword: string) {
         return this.http.post<AuthResponseData>(
-            `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.FIREBASEKEY}`,
+            `${urlDb}api/Users`,
             {
-                email: email,
-                password: password,
-                returnSecureToken: true
+              userEmail: userEmail,
+              userPassword: userPassword,
+              returnSecureToken: true
             }
         ).pipe(
             catchError(this.handleError),
             tap(resData => {
               this.handleAuthentication(
-                resData.email,
+                resData.userEmail,
                 resData.localId,
                 resData.idToken,
                 +resData.expiresIn
@@ -39,19 +41,19 @@ export class AuthService {
           );
     }
 
-    login(email: string, password: string) {
+    login(userEmail: string, userPassword: string) {
         return this.http.post<AuthResponseData>(
-            `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.FIREBASEKEY}`,
+            `${urlDb}api/Users`,
             {
-                email: email,
-                password: password,
-                returnSecureToken: true
+              userEmail: userEmail,
+              userPassword: userPassword,
+              returnSecureToken: true
             }
         ).pipe(
             catchError(this.handleError),
             tap(resData => {
               this.handleAuthentication(
-                resData.email,
+                resData.userEmail,
                 resData.localId,
                 resData.idToken,
                 +resData.expiresIn
@@ -62,8 +64,8 @@ export class AuthService {
     //if login exists it will maintain it
     autoLogin() {
       const userData: {
-        email: string;
-        id: string;
+        userEmail: string;
+        userId: string;
         _token: string;
         _tokenExpirationDate: string;
       } = JSON.parse(localStorage.getItem('userData'));
@@ -72,8 +74,8 @@ export class AuthService {
       }
 
       const loadedUser = new User(
-        userData.email,
-        userData.id,
+        userData.userEmail,
+        userData.userId,
         userData._token,
         new Date(userData._tokenExpirationDate)
       );
@@ -111,13 +113,13 @@ export class AuthService {
     // }
 
     private handleAuthentication(
-        email: string,
+        userEmail: string,
         userId: string,
         token: string,
         expiresIn: number
       ) {
         const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
-        const user = new User(email, userId, token, expirationDate);
+        const user = new User(userEmail, userId, token, expirationDate);
         this.user.next(user);
         this.autoLogout(expiresIn * 1000);
         //key to retrieve user from local storage

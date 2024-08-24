@@ -19,7 +19,7 @@ export class MovieCardComponent {
 
   constructor(private router:Router) {}
   onMovieClick(movie:Movie){
-    this.router.navigate(['/movie', movie.id])
+    this.router.navigate(['/movie', movie.movieId])
   }
 
 }

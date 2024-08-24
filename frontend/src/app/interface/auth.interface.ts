@@ -1,6 +1,6 @@
 export interface AuthResponseData {
     idToken: string,
-    email: string,
+    userEmail: string,
     refreshToken: string,
     expiresIn: string,
     localId: string,
