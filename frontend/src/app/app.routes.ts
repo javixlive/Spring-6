@@ -7,7 +7,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { SearchComponent } from './components/search/search.component';
 import { MovieCardDetailsComponent } from './components/movie-card-details/movie-card-details.component';
 import { AuthComponent } from './auth/auth.component';
-
+import { FavoritesComponent } from './components/favorites/favorites.component';
 
 export const routes: Routes = [
 
@@ -15,6 +15,7 @@ export const routes: Routes = [
   {path: 'movie/:id', component:MovieCardDetailsComponent},
   {path: 'search/:text', component:SearchComponent},
   {path: 'auth', component:AuthComponent},
+  {path: 'favorites', component:FavoritesComponent},
 
   {path: '', pathMatch:'full', redirectTo:'/home'},
   {path: '**',redirectTo:'/home'}
