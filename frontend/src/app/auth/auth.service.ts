@@ -18,6 +18,8 @@ export class AuthService {
   user = new BehaviorSubject<User>(null);
   private tokenExpirationTimer: any;
 
+  private isLocalStorageAvailable = typeof localStorage !== 'undefined';
+
   constructor(private http: HttpClient, private router: Router) {}
 
     signup(userEmail: string, userPassword: string) {
@@ -32,9 +34,9 @@ export class AuthService {
             catchError(this.handleError),
             tap(resData => {
               this.handleAuthentication(
+                resData.userID,
                 resData.userEmail,
                 resData.localId,
-                resData.idToken,
                 +resData.expiresIn
               );
             })
@@ -42,51 +44,99 @@ export class AuthService {
     }
 
     login(userEmail: string, userPassword: string) {
+
         return this.http.post<AuthResponseData>(
-            `${urlDb}api/Users`,
+            `${urlDb}api/Users/login`,
             {
               userEmail: userEmail,
               userPassword: userPassword,
-              returnSecureToken: true
+              //returnSecureToken: true
             }
         ).pipe(
             catchError(this.handleError),
             tap(resData => {
+
+
+              // this.handleAuthentication(
+              //   resData.userEmail,
+              // //prev localId
+              //   resData.userID,
+               // //prev idToken
+              //   resData.idToken,
+               // //prev expirees
+              //   +resData.expiresIn
+              // );
+              let expiresIn = 3000
+              let localId = "1"
               this.handleAuthentication(
+                resData.userID,
                 resData.userEmail,
-                resData.localId,
-                resData.idToken,
-                +resData.expiresIn
+                localId,
+                expiresIn,
+              //prev localId
+               //prev idToken
+                // resData.idToken,
+               //prev expirees
+                //+resData.expiresIn
               );
+
+              console.log(resData)
             })
         );
     }
     //if login exists it will maintain it
     autoLogin() {
-      const userData: {
-        userEmail: string;
-        userId: string;
-        _token: string;
-        _tokenExpirationDate: string;
-      } = JSON.parse(localStorage.getItem('userData'));
-      if (!userData) {
-        return;
-      }
+      if(this.isLocalStorageAvailable) {
+        const userData: {
+          userEmail: string;
+          userId: string;
+          _token: string;
+          _tokenExpirationDate: string;
+        } = JSON.parse(localStorage.getItem('userData'));
+        if (!userData) {
+          return;
+        }
 
-      const loadedUser = new User(
-        userData.userEmail,
-        userData.userId,
-        userData._token,
-        new Date(userData._tokenExpirationDate)
-      );
+        const loadedUser = new User(
+          userData.userEmail,
+          userData.userId,
+          userData._token,
+          new Date(userData._tokenExpirationDate)
+        );
 
-      if (loadedUser.token) {
-        this.user.next(loadedUser);
-        const expirationDuration =
-          new Date(userData._tokenExpirationDate).getTime() -
-          new Date().getTime();
-        this.autoLogout(expirationDuration);
+        if (loadedUser.token) {
+          this.user.next(loadedUser);
+          const expirationDuration =
+            new Date(userData._tokenExpirationDate).getTime() -
+            new Date().getTime();
+          this.autoLogout(expirationDuration);
+        }
       }
+      // const userData: {
+      //   userEmail: string;
+      //   userId: string;
+      //   _token: string;
+      //   _tokenExpirationDate: string;
+      // } = JSON.parse(localStorage.getItem('userData'));
+      // if (!userData) {
+      //   return;
+      // }
+
+      // const loadedUser = new User(
+      //   userData.userEmail,
+      //   userData.userId,
+      //   userData._token,
+      //   new Date(userData._tokenExpirationDate)
+      // );
+
+      // if (loadedUser.token) {
+      //   this.user.next(loadedUser);
+      //   const expirationDuration =
+      //     new Date(userData._tokenExpirationDate).getTime() -
+      //     new Date().getTime();
+      //   this.autoLogout(expirationDuration);
+      // }
+
     }
 
     logout() {
@@ -113,13 +163,13 @@ export class AuthService {
     // }
 
     private handleAuthentication(
+        userID: string,
         userEmail: string,
-        userId: string,
         token: string,
         expiresIn: number
       ) {
         const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
-        const user = new User(userEmail, userId, token, expirationDate);
+        const user = new User(userEmail, userID, token, expirationDate);
         this.user.next(user);
         this.autoLogout(expiresIn * 1000);
         //key to retrieve user from local storage
@@ -132,6 +182,7 @@ export class AuthService {
         return throwError(errorMessage);
         }
         switch (errorRes.error.error.message) {
+          //TODO: Check error messages in API
         case 'EMAIL_EXISTS':
             errorMessage = 'This email exists already';
             break;
