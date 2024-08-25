@@ -1,0 +1,6 @@
+@BollywoodAPI_HostAddress = "Insert adress"
+
+GET {{BollywoodAPI_HostAddress}}
+Accept: application/json
+
+###

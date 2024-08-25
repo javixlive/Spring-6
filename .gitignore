@@ -2,4 +2,11 @@ frontend/node_modules
 frontend/.angular
 frontend/coverage
 frontend/.env
+frontend/dist
+frontend/.dockerignore
 frontend/src/app/environment/environment.ts
+
+backend/BollywoodAPI/bin
+backend/BollywoodAPI/obj
+
+Spring_6.generated.sln
