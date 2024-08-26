@@ -1,10 +1,10 @@
 # BollywoodHub
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.8.
-&
 Visual Studio 2022 with Net Framework 8.0
+Microsoft SQL Server Management
 
-# Spring 4
+# Sprint 6
 
 * BollywoodHub
 * Javier Montaño Rodriguez
@@ -16,27 +16,40 @@ Interactive Movie Hub that shows Bollywood movies that allows you to search and 
 
 ## Objective
 
-Implement an API using C# with Net framework and SQL database, this will allowed in the future to have a much cleaner user experience (When it's finish!).
+Implementation of Docker + Kubernetes, ASP.NET, normalization of Database and Improvement of past work.
 
 ## Images of Project
 
-![1](imgs/API_png.png)
-![2](imgs/SQL_relationship.png)
+![1](imgs/website.png)
+![2](imgs/login.png)
+![3](imgs/api_1.png)
+![4](imgs/api_2.png)
+![5](imgs/docker_1.png)
+![6](imgs/docker_2.png)
+![7](imgs/kubectl.png)
+![8](imgs/sql_relation.png)
+![9](imgs/Karma_test.png)
+![10](imgs/Karma_test_coverage.png)
+
 
 ## Instructions
 
-When cloning this repository you must add the connection to your own SQL Server with the direction you wanna use for this API.
+When cloning this repository you must add the connection to your own SQL Server with the direction you wanna use for this API in the backend.
+And make an environment variable on the front end that links to that one.
+
+
 
 ## How it was done
 
-Since it was my first time working on C# and .Net Framework things didn't go smoothly but it's looking promising with the help of all the courses that Liderly provides us.
+Most of the backend was done last Sprint so in this one, it was more of fixing error and adding missing features. 
+Then with some research i was able to understand how to work with docker. And lastly Kubernetes was done with the help of the courses Liderly provided to me.
 
 ## Known Issues
 
-Favorites is not functional yet, and some parts in the front-end still need some work because of the API changes. 
+Somethings might bug a little with the new changes on the backend, mostly on the favorites section and some details in the cards
 
 ## Retrospective
 
 | What was done well? | What can I do differently? | What didn't go well? |
 ------------------|----------------------------|-----------------------
-| Route making and connecting everything to the project went really good. | Having a more clearer idea of how i want the database would have help | Favorites it's still not functional cause i'm still trying to understand how it should work.
+| Backend came out pretty smoothly. | More research on docker/kubernetes to make it look cleaner next time i work in this kind of projects. | Putting to work Docker with Kubernetes for the first time took some time to figure out on how to push my images to docker-hub so kubernetes didn't have trouble reading the image.
