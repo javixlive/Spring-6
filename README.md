@@ -21,15 +21,16 @@ Implementation of Docker + Kubernetes, ASP.NET, normalization of Database and Im
 ## Images of Project
 
 ![1](imgs/website.png)
-![2](imgs/login.png)
-![3](imgs/api_1.png)
-![4](imgs/api_2.png)
-![5](imgs/docker_1.png)
-![6](imgs/docker_2.png)
-![7](imgs/kubectl.png)
-![8](imgs/sql_relation.png)
-![9](imgs/Karma_test.png)
-![10](imgs/Karma_test_coverage.png)
+![2](imgs/movie_details.png)
+![3](imgs/login.png)
+![4](imgs/api_1.png)
+![5](imgs/api_2.png)
+![6](imgs/docker_1.png)
+![7](imgs/docker_2.png)
+![8](imgs/kubectl.png)
+![9](imgs/sql_relation.png)
+![10](imgs/Karma_test.png)
+![11](imgs/Karma_test_coverage.png)
 
 
 ## Instructions
