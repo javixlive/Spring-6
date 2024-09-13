@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+    name: bollywoodapi-deployment
+    labels:
+        app: bollywoodapi
+spec:
+    replicas: 3
+    selector:
+        matchLabels:
+            app: bollywoodapi
+    template:
+        metadata:
+            labels:
+                app: bollywoodapi
+        spec:
+            containers:
+            - name: bollywoodapi-container
+              image: javixlive/bollywoodapi:1.0.0
+              imagePullPolicy: Always
+              ports:
+                - containerPort: 80
